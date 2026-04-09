@@ -109,52 +109,52 @@ Procesul de generare și verificare a pachetului SIP poate fi reprezentat astfel
                  └─────────────┬────────────┘
                                │
                                ▼
+                 ┌─────────────────────────────┐
+                 │   Construire MI-SIP         │
+                 │  (hash_pachet = placeholder)│
+                 └─────────────┬───────────────┘
+                               │
+                               ▼
+                 ┌─────────────────────────────┐
+                 │   ZIP provizoriu            │
+                 │  (fișiere + MI preliminar)  │
+                 └─────────────┬───────────────┘
+                               │
+                               ▼
                  ┌──────────────────────────┐
-                 │   Construire MI-SIP       │
-                 │  (hash_pachet = placeholder)
+                 │  Calcul hash sincronizat │
+                 │  SHA256(ZIP provizoriu)  │
                  └─────────────┬────────────┘
                                │
                                ▼
                  ┌──────────────────────────┐
-                 │   ZIP provizoriu         │
-                 │  (fișiere + MI preliminar)│
+                 │  Actualizare MI-SIP      │
+                 │  (hash_pachet = ancora)  │
                  └─────────────┬────────────┘
                                │
                                ▼
                  ┌──────────────────────────┐
-                 │  Calcul hash sincronizat  │
-                 │  SHA256(ZIP provizoriu)   │
+                 │   ZIP final              │
+                 │  (fișiere + MI final)    │
                  └─────────────┬────────────┘
                                │
                                ▼
                  ┌──────────────────────────┐
-                 │  Actualizare MI-SIP       │
-                 │  (hash_pachet = ancora)   │
+                 │  Calcul hash ZIP final   │
+                 │  (amprentă fizică)       │
                  └─────────────┬────────────┘
                                │
                                ▼
                  ┌──────────────────────────┐
-                 │   ZIP final               │
-                 │  (fișiere + MI final)     │
+                 │   Construire ME-SIP      │
+                 │  (hash_pachet = ancora)  │
+                 │  (hash_zip = amprentă)   │
                  └─────────────┬────────────┘
                                │
                                ▼
                  ┌──────────────────────────┐
-                 │  Calcul hash ZIP final    │
-                 │  (amprentă fizică)        │
-                 └─────────────┬────────────┘
-                               │
-                               ▼
-                 ┌──────────────────────────┐
-                 │   Construire ME-SIP       │
-                 │  (hash_pachet = ancora)   │
-                 │  (hash_zip = amprentă)    │
-                 └─────────────┬────────────┘
-                               │
-                               ▼
-                 ┌──────────────────────────┐
-                 │  Verificare încrucișată   │
-                 │  MI ↔ ZIP ↔ ME            │
+                 │  Verificare încrucișată  │
+                 │  MI ↔ ZIP ↔ ME           │
                  └──────────────────────────┘
 
 ---
@@ -169,5 +169,10 @@ Procesul de generare și verificare a pachetului SIP poate fi reprezentat astfel
 
 ---
 
+## Status documentație
+Documentația este în curs de extindere. Vor fi adăugate secțiuni privind:
+- mecanismele de detecție a alterării în transport;
+- rolul fiecărui instrument extern (ExifTool, Siegfried, veraPDF, etc);
+- exemple de validare și audit.
 
 
