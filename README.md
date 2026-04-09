@@ -56,6 +56,76 @@ Aplicația utilizează instrumente specializate pentru analiză și validare:
 - alte utilitare interne pentru hashing, structurare și verificări.
 
 ---
+## Arhitectura aplicației
+
+Arhivarius SIP este construit ca aplicație desktop pe baza framework‑ului **Electron**, combinând:
+
+- un **proces principal (main process)** pentru operațiuni de sistem, execuția utilitarelor externe, generarea SIP și gestionarea bazei de date;
+- un **proces de interfață (renderer process)** pentru logica UI și interacțiunea cu utilizatorul;
+- un strat **Node.js** care asigură acces la sistemul de fișiere, hashing, procese externe și module interne.
+
+Arhitectura este modulară, cu separarea clară a responsabilităților: scanare, validare, generare SIP, baze de date, utilitare externe și interfață.
+
+---
+
+### Rolul Node.js în aplicație
+
+Node.js este utilizat ca strat de execuție pentru operațiuni care necesită acces direct la sistemul de operare:
+
+- manipularea fișierelor și directoarelor (`fs`, `path`);
+- calcul hash SHA‑256 (`crypto`);
+- execuția utilitarelor externe (ExifTool, Siegfried, veraPDF) prin `child_process`;
+- generarea arhivelor ZIP (JSZip, AdmZip);
+- gestionarea bazei de date SQLite;
+- comunicarea IPC între procesele Electron.
+
+Node.js permite aplicației să combine o interfață web cu funcționalități locale avansate, specifice aplicațiilor native.
+
+---
+
+### Componente principale
+
+#### 1. Procesul principal (Electron + Node.js)
+Responsabil pentru:
+- inițializarea aplicației și crearea ferestrei principale;
+- gestionarea dialogurilor de fișiere;
+- scanarea și analiza fișierelor;
+- execuția utilitarelor externe (Siegfried, ExifTool, veraPDF);
+- generarea manifestelor MI/ME și a arhivei ZIP;
+- gestionarea bazei de date SQLite;
+- comunicarea IPC cu interfața.
+
+Module utilizate:
+- `electron`, `fs`, `path`, `child_process`
+- `sqlite3` (bază de date)
+- `adm-zip` și `JSZip` (arhivare)
+- `crypto` (hashing)
+- `unzipper`, `https`, `os`
+
+#### 2. Procesul de interfață (renderer)
+Responsabil pentru:
+- afișarea formularului SIP;
+- afișarea progresului de scanare;
+- gestionarea listei de fișiere, duplicate, extensii modificate;
+- generarea hărții vizuale a structurii folderelor;
+- trimiterea comenzilor către procesul principal prin IPC.
+
+Module utilizate:
+- `ipcRenderer`
+- utilitare locale (`emitent.js`, funcții de scanare și mapare)
+
+---
+
+## Baza de date
+
+Aplicația folosește o bază de date **SQLite**, stocată local în directorul utilizatorului:
+
+Baza de date este utilizată pentru:
+- evidența pachetelor generate;
+- logarea operațiunilor;
+- păstrarea metadatelor asociate fiecărui SIP.
+
+---
 
 ## Construcția manifestelor (MI-SIP și ME-SIP)
 
