@@ -6,7 +6,7 @@ Aplicația permite validarea fișierelor, generarea manifestelor și crearea pac
 ---
 ## Demonstrație vizuală: Fluxul de generare SIP
 
-![Flux SIP](images/Creare_SIP.gif)
+![Flux SIP](images/Flux-Creare-SIP.gif)
 ---
 ## Funcționare (pe scurt)
 
