@@ -4,7 +4,10 @@ Arhivarius SIP este un modul dedicat compunerii pachetului de transmitere (SIP),
 Aplicația permite validarea fișierelor, generarea manifestelor și crearea pachetului ZIP final pentru transfer.
 
 ---
+## Demonstrație vizuală: Fluxul de generare SIP
 
+![Flux SIP](images/Creare_SIP.gif)
+---
 ## Funcționare (pe scurt)
 
 ### 1. Formular SIP
@@ -35,16 +38,16 @@ Poți descărca fișierul CSV cu detalii despre conținutul SIP.
 ## Capturi de ecran
 
 ### Formular SIP
-![Creare SIP – Pasul 1](images/Creare SIP_1.png)
+![Creare SIP – Pasul 1](images/Creare_SIP_1.png)
 
 ### Scanare și progres
-![Creare SIP – Pasul 2](images/Creare SIP_2.png)
+![Creare SIP – Pasul 2](images/Creare_SIP_2.png)
 
 ### Rezultate scanare
-![Creare SIP – Pasul 3](images/Creare SIP_3.png)
+![Creare SIP – Pasul 3](images/Creare_SIP_3.png)
 
 ### Pachet generat
-![Creare SIP – Pasul 4](images/Creare SIP_4.png)
+![Creare SIP – Pasul 4](images/Creare_SIP_4.png)
 
 ---
 
